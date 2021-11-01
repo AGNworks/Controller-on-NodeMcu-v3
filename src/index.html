@@ -2,10 +2,40 @@
     <html>
         <head>
             <link rel="stylesheet" href="styles.css">
-            <title>Control</title>
+            <title>Index</title>
         </head>
-        <body>
+        <body> 
             <h1>DMX-512 Controller</h1>
-            <p>Adjust settings</p>
+            <button onclick="location.href='control.html'"><strong>Control page</strong></button>
+            <p>With these buttons you can switch on/off all the red/green/blue/white channels</p>
+
+            <select id="LED type" name="LED">
+                <option>RGB</option>
+                <option>RGBW</option>
+            </select>
+
+            <div class="row">
+                <div class="column4">
+                    <button class="button button1">RED</button>
+                </div>
+                <div class="column4">
+                    <button class="button button2">GREEN</button>
+                </div>
+                <div class="column4">
+                    <button class="button button3">BLUE</button>
+                </div>
+                <div class="column4">
+                    <button class="button button4">WHITE</button>
+                </div>
+            </div>
+            <div class="row" >
+                <div class="column2" onclick="location.href='allON'">
+                    <button >ALL ON</button>
+                </div>
+                <div class="column2" onclick="location.href='allOFF'">
+                    <button>ALL OFF</button>
+                </div>
+            </div>
+
         </body>
     </html>
