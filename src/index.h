@@ -1,3 +1,5 @@
+const char MAIN_page[] PROGMEM = R"=====(
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -98,3 +100,6 @@
         </script>
     </body>
 </html>
+
+
+)=====";
