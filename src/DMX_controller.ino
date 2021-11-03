@@ -16,7 +16,8 @@ const char *ssid = APSSID;
 const char *password = APPSK;
 
 String type = "RGB";
-long ch_value =0;
+long ch_value = 0;
+long ch_number = 1;
 
 ESP8266WebServer server(80);    // Go to http://192.168.4.1 in a web browser
 
@@ -73,11 +74,16 @@ void handleLEDtype() {
 }
 
 void handleLEDvalue() {
-  String led_value = server.arg("LEDvalue"); //Refer  xhttp.open("GET", "setLED?LEDstate="+led, true);
-  Serial.println(led_value);
-  ch_value = led_value.toInt();
-  change_all(ch_value);
-  server.send(200, "text/plane", led_value);
+  String led_value = server.arg("LEDnumber"); //Refer  xhttp.open("GET", "setLED?LEDstate="+led, true);
+  ch_value = led_value.substring(3).toInt();
+  ch_number = led_value.substring(0,3).toInt();
+  /*Serial.println("number");
+  Serial.println(ch_number);
+  Serial.println("value");
+  Serial.println(ch_value);*/
+  dmx.write(ch_number, ch_value);
+  dmx.update();
+  server.send(200, "text/plane", led_value.substring(3));
 }
 
 

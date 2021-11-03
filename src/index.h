@@ -10,18 +10,22 @@ const char MAIN_page[] PROGMEM = R"=====(
               font-family: verdana;
               font-size: 300%;
               margin: 20px;
+              align-items: center;
             }
             p {
-              color: red;
+              color: black;
               font-family: verdana;
-              font-size: 160%;
+              font-size: 80%;
+              align-items: center;
             }
             button {
+                align-items: center;
                 font-size: 160%;
                 margin-right: 20px;
                 margin-bottom: 20px;
             }
             input{
+                align-items: center;
                 width: 40%;
             }
             </style>
@@ -29,15 +33,15 @@ const char MAIN_page[] PROGMEM = R"=====(
     <body>
         <h1>DMX-512 Controller</h1>
 
-        <div style="margin: 20px; font-size: 160%;">
-            <select name="Led type" id="led_type" style="margin-bottom: 40px;" onchange="sendType(led_type.value)">
+        <div id="chose_type" style="margin: 20px; font-size: 160%; ">
+            <select name="Led type" id="led_type" style="margin-bottom: 40px; font-size: 100%" onchange="sendType(led_type.value)">
                 <option value="RGB">RGB</option>
                 <option value="RGBW" >RGBW</option>
             </select>
-            LED type :<span id="LEDType">NA</span>
+            LED type :<span id="LEDType">RGB</span>
         </div>
 
-        <div id="demo" style="margin: 20px;" >
+        <div id="colors" style="margin: 20px;" >
             <button type="button" onclick="sendData(1)" style="background-color:red;">RED</button>
             <button type="button" onclick="sendData(2)" style="background-color:green;">GREEN</button>
             <button type="button" onclick="sendData(3)" style="background-color:blue;">BLUE</button>
@@ -48,14 +52,20 @@ const char MAIN_page[] PROGMEM = R"=====(
         </div>
 
         <div style="margin: 20px; color:red; font-size: 160%">
-            LED State is : <span id="LEDState">NA</span>
+            LED State is : <span id="LEDState">OFF</span>
         </div>
 
-        <div style="margin: 20px; font-size: 160%">
-            <input type="range" name = "ch_range" min = "0" max = "255" value = "0" id = "ch_value" onchange="sendvalue(ch_value.value)"><br>
-            Value : <span id="channel_value">NA</span>
+        <div id="ch_slider" style="margin: 20px; font-size: 160%">
+            <p>Number of DMX channel:</p>
+            <input type = "number" id = "ch_number" value = "1" min = "1" max = "512" style="background-color:lightgrey; color:black; margin-bottom: 20px; width: 10%; font-size:150% ;"><br>
+            <input type="range" id = "ch_value" name = "ch_range" min = "0" max = "255" value = "0"  onchange="sendvalue(ch_value.value,ch_number.value)"><br>
+            Value : <span id="channel_value">0</span>
         </div>
 
+        <div style="margin: 20px; ">
+            <button type="button" onclick="changeslider('minus')">MINUS</button>
+            <button type="button" onclick="changeslider('plus')">PLUS</button><BR>
+        </div>
         <script>
             
         function sendData(led) {
@@ -84,7 +94,7 @@ const char MAIN_page[] PROGMEM = R"=====(
         xhttp.send();
         }
 
-        function sendvalue(chvalue) {
+        function sendvalue(chvalue,chnumber) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) 
@@ -93,9 +103,39 @@ const char MAIN_page[] PROGMEM = R"=====(
             this.responseText; 
             }
         };
-        xhttp.open("GET", "setvalue?LEDvalue="+chvalue, true);
+        var info
+        if (chnumber.length == 1)
+         { 
+            info = "00" + chnumber;
+         };
+         if (chnumber.length == 2)
+         { 
+            info = "0" + chnumber;
+         };
+         if (chnumber.length == 3)
+         { 
+            info = chnumber;
+         };
+         info = info +  chvalue; 
+
+        xhttp.open("GET", "setvalue?LEDnumber="+info, true);
         xhttp.send();
         }
+
+        function changeslider(op){
+            if (op== "plus"){
+            var x = parseInt(document.getElementById("ch_value").value);
+            x = x+1 ;
+            document.getElementById("ch_value").value = x;
+            sendvalue(ch_value.value,ch_number.value);
+            };
+            if (op== "minus"){
+            var x = parseInt(document.getElementById("ch_value").value);
+            x = x-1 ;
+            document.getElementById("ch_value").value = x;
+            sendvalue(ch_value.value,ch_number.value);
+            };
+        };
 
         </script>
     </body>
