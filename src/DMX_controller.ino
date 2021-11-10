@@ -3,9 +3,11 @@
 #include <ESP8266WebServer.h>
 #include <ESPDMX.h>
 
-#include "index.h"
+#include "index_ru.h"
 
 DMXESPSerial dmx;
+
+#define ledpin 12  //pin D6 on NodeMCU
 
 #ifndef APSSID
 #define APSSID "DMX512"
@@ -91,9 +93,12 @@ void handleLEDvalue() {
 void setup() {
   pinMode(5, OUTPUT);
   digitalWrite(5, HIGH);
-  
+
+  pinMode(ledpin, OUTPUT);  
+  digitalWrite(ledpin, HIGH); //turning on the indicator LED 
+
   delay(1000);
-  dmx.init(512);   //we will use all the 512 DMX channels
+  dmx.init(511);   //we will use all the 512 DMX channels
   delay(100);
 
   Serial.begin(9600);
