@@ -13,3 +13,6 @@ This controller is based on NodeMCU microcontroller and uses an RS485 module to 
 The following picture shows the schemantics without the power part.
 
 ![Scheme](https://github.com/AGNworks/Controller-on-NodeMcu-v3/blob/main/schematics/nodemcu_rs485.JPG)
+
+## What you need
+If uou want to use this program you will need two files, the [index_en.html](https://github.com/AGNworks/Controller-on-NodeMcu-v3/blob/main/src/index_en.h) (or [index_ru.html](https://github.com/AGNworks/Controller-on-NodeMcu-v3/blob/main/src/index_ru.h)) and the arduino file ([DMX_controller.ino](https://github.com/AGNworks/Controller-on-NodeMcu-v3/blob/main/src/DMX_controller.ino)) . Put these files to one folder and you should be able to compile it if you installed the inculeded libraries. 
