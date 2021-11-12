@@ -16,3 +16,8 @@ The following picture shows the schemantics without the power part.
 
 ## What you need
 If uou want to use this program you will need two files, the [index_en.html](https://github.com/AGNworks/Controller-on-NodeMcu-v3/blob/main/src/index_en.h) (or [index_ru.html](https://github.com/AGNworks/Controller-on-NodeMcu-v3/blob/main/src/index_ru.h)) and the arduino file ([DMX_controller.ino](https://github.com/AGNworks/Controller-on-NodeMcu-v3/blob/main/src/DMX_controller.ino)) . Put these files to one folder and you should be able to compile it, if you installed the inculeded libraries. 
+
+## Case for the controller
+
+Soon i will share here the 3D files of the case, here is a picture to demonstrate the design.
+![3dmodel](https://github.com/AGNworks/Controller-on-NodeMcu-v3/blob/main/pics/3dscreenshot.JPG)
