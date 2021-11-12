@@ -19,5 +19,5 @@ If uou want to use this program you will need two files, the [index_en.html](htt
 
 ## Case for the controller
 
-Soon i will share here the 3D files of the case, here is a picture to demonstrate the design.
+Soon I will share the 3D files of the case, here is a picture to demonstrate the design.
 ![3dmodel](https://github.com/AGNworks/Controller-on-NodeMcu-v3/blob/main/pics/3dscreenshot.JPG)
